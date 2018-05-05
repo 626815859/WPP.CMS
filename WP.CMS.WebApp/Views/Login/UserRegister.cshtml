@@ -1,0 +1,40 @@
+﻿@model WP.CMS.Model.UserInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserRegister</title>
+</head>
+
+<body>
+    <div>
+        @using (Ajax.BeginForm("UserRegister", new { }, new AjaxOptions() { HttpMethod = "post"}))
+        {
+            <table>
+                <tr>
+                    <td>姓名:</td>
+                    <td>@Html.TextBoxFor(u => u.UserName)</td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td>@Html.TextBoxFor(u => u.UserPwd)</td>
+                </tr>
+                <tr>
+                    <td>邮箱:</td>
+                    <td>@Html.TextBoxFor(u => u.UserMail)</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交" /></td>
+
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

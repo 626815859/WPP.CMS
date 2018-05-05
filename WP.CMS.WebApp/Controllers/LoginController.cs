@@ -10,6 +10,7 @@ namespace Iotzzh.CMS.Webapp.Controllers
 {
     public class LoginController : Controller
     {
+        UserInfoService userInfoService = new UserInfoService();
         //约定大于配置
         // GET: /Login/
 
@@ -17,6 +18,37 @@ namespace Iotzzh.CMS.Webapp.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 注册页1
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserRegister()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 注册页2
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UserRegister(UserInfo userInfo)
+        {
+            userInfo.RegTime = DateTime.Now;
+            if(userInfoService.Add(userInfo)==true)
+            {
+                return Content("<script>alert('注册成功。');window.location.href='/Login/Index'</script>");
+                // return RedirectToAction("Index");  //重定向到Home Index
+            }
+            else
+            {
+                return View("UserRegister");
+            }
+            
+        }
+
+
         //通过Ajax获取前台传入的数据
         public ActionResult UserLogin()
         {
@@ -39,7 +71,7 @@ namespace Iotzzh.CMS.Webapp.Controllers
             }
             string userName = Request["LoginCode"];
             string userPwd = Request["LoginPwd"];
-            UserInfoService userInfoService = new UserInfoService();
+          //  UserInfoService userInfoService = new UserInfoService();
             UserInfo userInfo = userInfoService.GetUserInfo(userName, userPwd);
             if (userInfo != null)
             {
