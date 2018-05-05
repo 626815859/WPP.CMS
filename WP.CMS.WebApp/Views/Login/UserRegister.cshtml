@@ -9,12 +9,56 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>UserRegister</title>
+    <title>用户注册</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+
+            $("#form0").validate({
+                rules: {
+                    UserName: "required",
+
+                    UserPwd: "required",
+
+                    UserMail: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    UserName: "请输入账号",
+                    UserPwd: {
+                        required: "请输入密码",
+                        minlength: "密码长度不能小于 5 个字母"
+                    },
+                    UserMail: "请输入一个正确的邮箱"
+                }
+            });
+
+            $(function () {
+                $("#UserPwdTwo").blur(function () {
+                    if ($("#UserPwd").val() != $("#UserPwdTwo").val()) {
+
+                        alert("两次输入的密码不一致");
+
+                    }
+                })
+            });
+        })
+
+    </script>
+
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <div>
-        @using (Ajax.BeginForm("UserRegister", new { }, new AjaxOptions() { HttpMethod = "post"}))
+        @using (Ajax.BeginForm("UserRegister", new { }, new AjaxOptions() { HttpMethod = "post" }))
         {
             <table>
                 <tr>
@@ -24,6 +68,10 @@
                 <tr>
                     <td>密码:</td>
                     <td>@Html.TextBoxFor(u => u.UserPwd)</td>
+                </tr>
+                <tr>
+                    <td>验证密码:</td>
+                    <td><input type="text" id="UserPwdTwo" /></td>
                 </tr>
                 <tr>
                     <td>邮箱:</td>
