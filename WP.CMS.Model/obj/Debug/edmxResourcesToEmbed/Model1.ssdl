@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="UserInfo" EntityType="Model1.Store.UserInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="Model1.Store.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NewsComments" EntityType="Model1.Store.NewsComments" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserInfoNewsComments" Association="Model1.Store.UserInfoNewsComments">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="NewsComments" EntitySet="NewsComments" />
+    </AssociationSet>
+    <AssociationSet Name="NewsNewsComments" Association="Model1.Store.NewsNewsComments">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewsComments" EntitySet="NewsComments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="UserPwd" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="UserMail" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="RegTime" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Msg" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SubDateTime" Type="datetime" Nullable="true" />
+    <Property Name="Author" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ImagePath" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NewsComments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsID" Type="int" Nullable="true" />
+    <Property Name="Msg" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatDateTime" Type="datetime" Nullable="true" />
+    <Property Name="UserInfo_Id" Type="int" Nullable="false" />
+    <Property Name="News_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserInfoNewsComments">
+    <End Role="UserInfo" Type="Model1.Store.UserInfo" Multiplicity="1" />
+    <End Role="NewsComments" Type="Model1.Store.NewsComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NewsComments">
+        <PropertyRef Name="UserInfo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NewsNewsComments">
+    <End Role="News" Type="Model1.Store.News" Multiplicity="1" />
+    <End Role="NewsComments" Type="Model1.Store.NewsComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NewsComments">
+        <PropertyRef Name="News_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

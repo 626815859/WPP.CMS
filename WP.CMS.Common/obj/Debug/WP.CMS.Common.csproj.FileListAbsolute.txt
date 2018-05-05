@@ -1,0 +1,5 @@
+F:\新建文件夹\net课堂项目\2018\WP.CMS\WP.CMS.Common\bin\Debug\WP.CMS.Common.dll
+F:\新建文件夹\net课堂项目\2018\WP.CMS\WP.CMS.Common\bin\Debug\WP.CMS.Common.pdb
+F:\新建文件夹\net课堂项目\2018\WP.CMS\WP.CMS.Common\obj\Debug\WP.CMS.Common.dll
+F:\新建文件夹\net课堂项目\2018\WP.CMS\WP.CMS.Common\obj\Debug\WP.CMS.Common.pdb
+F:\新建文件夹\net课堂项目\2018\WP.CMS\WP.CMS.Common\obj\Debug\WP.CMS.Common.csprojResolveAssemblyReference.cache
